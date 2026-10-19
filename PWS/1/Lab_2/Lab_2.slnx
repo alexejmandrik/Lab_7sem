@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../ResultsAuthenticate/ResultsAuthenticate.csproj" />
+  <Project Path="../ResultsCollection/ResultsCollection.csproj" />
+  <Project Path="Lab_2.csproj" />
+</Solution>

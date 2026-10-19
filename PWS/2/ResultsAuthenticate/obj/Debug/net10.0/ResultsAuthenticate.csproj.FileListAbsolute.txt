@@ -1,0 +1,13 @@
+D:\Labs_7sem\PWS\2\ResultsAuthenticate\bin\Debug\net10.0\ResultsAuthenticate.deps.json
+D:\Labs_7sem\PWS\2\ResultsAuthenticate\bin\Debug\net10.0\ResultsAuthenticate.dll
+D:\Labs_7sem\PWS\2\ResultsAuthenticate\bin\Debug\net10.0\ResultsAuthenticate.pdb
+D:\Labs_7sem\PWS\2\ResultsAuthenticate\obj\Debug\net10.0\ResultsAuthenticate.csproj.AssemblyReference.cache
+D:\Labs_7sem\PWS\2\ResultsAuthenticate\obj\Debug\net10.0\ResultsAuthenticate.GeneratedMSBuildEditorConfig.editorconfig
+D:\Labs_7sem\PWS\2\ResultsAuthenticate\obj\Debug\net10.0\ResultsAuthenticate.AssemblyInfoInputs.cache
+D:\Labs_7sem\PWS\2\ResultsAuthenticate\obj\Debug\net10.0\ResultsAuthenticate.AssemblyInfo.cs
+D:\Labs_7sem\PWS\2\ResultsAuthenticate\obj\Debug\net10.0\ResultsAuthenticate.csproj.CoreCompileInputs.cache
+D:\Labs_7sem\PWS\2\ResultsAuthenticate\obj\Debug\net10.0\ResultsAuthenticate.dll
+D:\Labs_7sem\PWS\2\ResultsAuthenticate\obj\Debug\net10.0\refint\ResultsAuthenticate.dll
+D:\Labs_7sem\PWS\2\ResultsAuthenticate\obj\Debug\net10.0\ResultsAuthenticate.pdb
+D:\Labs_7sem\PWS\2\ResultsAuthenticate\obj\Debug\net10.0\ref\ResultsAuthenticate.dll
+D:\Labs_7sem\PWS\2\ResultsAuthenticate\obj\Debug\net10.0\ResultsA.635932C2.Up2Date

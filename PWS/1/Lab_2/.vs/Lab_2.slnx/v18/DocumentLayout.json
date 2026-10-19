@@ -1,0 +1,52 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Labs_7sem\\PWS\\1\\Lab_2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{36C4AF85-F770-4FD4-92F7-779B0F059FD0}|..\\ResultsAuthenticate\\ResultsAuthenticate.csproj|d:\\labs_7sem\\pws\\1\\resultsauthenticate\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BC4A227-1323-4BEA-9758-60FCA690F4AA}|..\\ResultsCollection\\ResultsCollection.csproj|d:\\labs_7sem\\pws\\1\\resultscollection\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "D:\\Labs_7sem\\PWS\\1\\ResultsAuthenticate\\Class1.cs",
+              "RelativeDocumentMoniker": "..\\ResultsAuthenticate\\Class1.cs",
+              "ToolTip": "D:\\Labs_7sem\\PWS\\1\\ResultsAuthenticate\\Class1.cs",
+              "RelativeToolTip": "..\\ResultsAuthenticate\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-16T20:16:45.904Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "D:\\Labs_7sem\\PWS\\1\\ResultsCollection\\Class1.cs",
+              "RelativeDocumentMoniker": "..\\ResultsCollection\\Class1.cs",
+              "ToolTip": "D:\\Labs_7sem\\PWS\\1\\ResultsCollection\\Class1.cs",
+              "RelativeToolTip": "..\\ResultsCollection\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-16T20:16:12.3Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

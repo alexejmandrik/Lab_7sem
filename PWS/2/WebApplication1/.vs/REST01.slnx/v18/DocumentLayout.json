@@ -1,0 +1,135 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Labs_7sem\\PWS\\2\\WebApplication1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C8D93DC5-71A8-D8D5-40CB-A0F2426EF042}|REST01.csproj|d:\\labs_7sem\\pws\\2\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8D93DC5-71A8-D8D5-40CB-A0F2426EF042}|REST01.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3959FCD5-DADC-A9CD-1EF4-633C17166946}|..\\ResultsAuthenticate\\ResultsAuthenticate.csproj|d:\\labs_7sem\\pws\\2\\resultsauthenticate\\rolemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3959FCD5-DADC-A9CD-1EF4-633C17166946}|..\\ResultsAuthenticate\\ResultsAuthenticate.csproj|d:\\labs_7sem\\pws\\2\\resultsauthenticate\\authenticationmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3959FCD5-DADC-A9CD-1EF4-633C17166946}|..\\ResultsAuthenticate\\ResultsAuthenticate.csproj|d:\\labs_7sem\\pws\\2\\resultsauthenticate\\authenticate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8D93DC5-71A8-D8D5-40CB-A0F2426EF042}|REST01.csproj|d:\\labs_7sem\\pws\\2\\webapplication1\\controllers\\resultscontrollers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8D93DC5-71A8-D8D5-40CB-A0F2426EF042}|REST01.csproj|solutionrelative:controllers\\resultscontrollers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3959FCD5-DADC-A9CD-1EF4-633C17166946}|..\\ResultsAuthenticate\\ResultsAuthenticate.csproj|d:\\labs_7sem\\pws\\2\\resultsauthenticate\\resultsauthenticate.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8D93DC5-71A8-D8D5-40CB-A0F2426EF042}|REST01.csproj|d:\\labs_7sem\\pws\\2\\webapplication1\\rest01.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C8D93DC5-71A8-D8D5-40CB-A0F2426EF042}|REST01.csproj|solutionrelative:rest01.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthenticationMiddleware.cs",
+              "DocumentMoniker": "D:\\Labs_7sem\\PWS\\2\\ResultsAuthenticate\\AuthenticationMiddleware.cs",
+              "RelativeDocumentMoniker": "..\\ResultsAuthenticate\\AuthenticationMiddleware.cs",
+              "ToolTip": "D:\\Labs_7sem\\PWS\\2\\ResultsAuthenticate\\AuthenticationMiddleware.cs",
+              "RelativeToolTip": "..\\ResultsAuthenticate\\AuthenticationMiddleware.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAADoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-01T05:32:11.078Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RoleMiddleware.cs",
+              "DocumentMoniker": "D:\\Labs_7sem\\PWS\\2\\ResultsAuthenticate\\RoleMiddleware.cs",
+              "RelativeDocumentMoniker": "..\\ResultsAuthenticate\\RoleMiddleware.cs",
+              "ToolTip": "D:\\Labs_7sem\\PWS\\2\\ResultsAuthenticate\\RoleMiddleware.cs",
+              "RelativeToolTip": "..\\ResultsAuthenticate\\RoleMiddleware.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAADkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-01T06:45:27.248Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Labs_7sem\\PWS\\2\\WebApplication1\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Labs_7sem\\PWS\\2\\WebApplication1\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-30T19:14:45.506Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Authenticate.cs",
+              "DocumentMoniker": "D:\\Labs_7sem\\PWS\\2\\ResultsAuthenticate\\Authenticate.cs",
+              "RelativeDocumentMoniker": "..\\ResultsAuthenticate\\Authenticate.cs",
+              "ToolTip": "D:\\Labs_7sem\\PWS\\2\\ResultsAuthenticate\\Authenticate.cs",
+              "RelativeToolTip": "..\\ResultsAuthenticate\\Authenticate.cs",
+              "ViewState": "AgIAAKQAAAAAAAAAAADwv78AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-01T05:31:10.51Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ResultsControllers.cs",
+              "DocumentMoniker": "D:\\Labs_7sem\\PWS\\2\\WebApplication1\\Controllers\\ResultsControllers.cs",
+              "RelativeDocumentMoniker": "Controllers\\ResultsControllers.cs",
+              "ToolTip": "D:\\Labs_7sem\\PWS\\2\\WebApplication1\\Controllers\\ResultsControllers.cs",
+              "RelativeToolTip": "Controllers\\ResultsControllers.cs",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAUwIAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-30T19:13:29.036Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ResultsAuthenticate.csproj",
+              "DocumentMoniker": "D:\\Labs_7sem\\PWS\\2\\ResultsAuthenticate\\ResultsAuthenticate.csproj",
+              "RelativeDocumentMoniker": "..\\ResultsAuthenticate\\ResultsAuthenticate.csproj",
+              "ToolTip": "D:\\Labs_7sem\\PWS\\2\\ResultsAuthenticate\\ResultsAuthenticate.csproj",
+              "RelativeToolTip": "..\\ResultsAuthenticate\\ResultsAuthenticate.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-10-01T05:48:48.07Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "REST01.csproj",
+              "DocumentMoniker": "D:\\Labs_7sem\\PWS\\2\\WebApplication1\\REST01.csproj",
+              "RelativeDocumentMoniker": "REST01.csproj",
+              "ToolTip": "D:\\Labs_7sem\\PWS\\2\\WebApplication1\\REST01.csproj",
+              "RelativeToolTip": "REST01.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-10-01T05:38:11.998Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

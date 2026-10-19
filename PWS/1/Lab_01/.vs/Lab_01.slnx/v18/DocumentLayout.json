@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Labs_7sem\\PWS\\1\\Lab_01\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3D2B18EB-6F7C-4B8B-8025-F63334A97263}|Lab_01\\Lab_01.csproj|d:\\labs_7sem\\pws\\1\\lab_01\\lab_01\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{3D2B18EB-6F7C-4B8B-8025-F63334A97263}|Lab_01\\Lab_01.csproj|solutionrelative:lab_01\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D2B18EB-6F7C-4B8B-8025-F63334A97263}|Lab_01\\Lab_01.csproj|D:\\Labs_7sem\\PWS\\1\\Lab_01\\lab_01\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D2B18EB-6F7C-4B8B-8025-F63334A97263}|Lab_01\\Lab_01.csproj|solutionrelative:lab_01\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "web.config",
+              "DocumentMoniker": "D:\\Labs_7sem\\PWS\\1\\Lab_01\\Lab_01\\web.config",
+              "RelativeDocumentMoniker": "Lab_01\\web.config",
+              "ToolTip": "D:\\Labs_7sem\\PWS\\1\\Lab_01\\Lab_01\\web.config*",
+              "RelativeToolTip": "Lab_01\\web.config*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-09-08T18:19:47.973Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "D:\\Labs_7sem\\PWS\\1\\Lab_01\\Lab_01\\Class1.cs",
+              "RelativeDocumentMoniker": "Lab_01\\Class1.cs",
+              "ToolTip": "D:\\Labs_7sem\\PWS\\1\\Lab_01\\Lab_01\\Class1.cs",
+              "RelativeToolTip": "Lab_01\\Class1.cs",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAYwJIAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-08T17:43:59.325Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
