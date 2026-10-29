@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="../ResultsAuthenticate/ResultsAuthenticate.csproj" />
-  <Project Path="../ResultsCollection/ResultsCollection.csproj" />
-  <Project Path="REST01.csproj" />
-</Solution>

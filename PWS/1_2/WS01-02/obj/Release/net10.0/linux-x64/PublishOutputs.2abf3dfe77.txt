@@ -1,0 +1,4 @@
+D:\Labs_7sem\PWS\1_1\WS01-01\publish\appsettings.Development.json
+D:\Labs_7sem\PWS\1_1\WS01-01\publish\appsettings.json
+D:\Labs_7sem\PWS\1_1\WS01-01\publish\WS01-01.pdb
+D:\Labs_7sem\PWS\1_1\WS01-01\publish\WS01-01

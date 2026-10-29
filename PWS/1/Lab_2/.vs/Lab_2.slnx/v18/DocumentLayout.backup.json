@@ -1,12 +1,52 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Labs_7sem\\PWS\\1\\Lab_2\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A77663BB-8FEF-CCB3-501C-6E6EBB85818E}|..\\ResultsCollection\\ResultsCollection.csproj|d:\\labs_7sem\\pws\\1\\resultscollection\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3959FCD5-DADC-A9CD-1EF4-633C17166946}|..\\ResultsAuthenticate\\ResultsAuthenticate.csproj|d:\\labs_7sem\\pws\\1\\resultsauthenticate\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "D:\\Labs_7sem\\PWS\\1\\ResultsAuthenticate\\Class1.cs",
+              "RelativeDocumentMoniker": "..\\ResultsAuthenticate\\Class1.cs",
+              "ToolTip": "D:\\Labs_7sem\\PWS\\1\\ResultsAuthenticate\\Class1.cs",
+              "RelativeToolTip": "..\\ResultsAuthenticate\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-16T20:16:45.904Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "D:\\Labs_7sem\\PWS\\1\\ResultsCollection\\Class1.cs",
+              "RelativeDocumentMoniker": "..\\ResultsCollection\\Class1.cs",
+              "ToolTip": "D:\\Labs_7sem\\PWS\\1\\ResultsCollection\\Class1.cs",
+              "RelativeToolTip": "..\\ResultsCollection\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-16T20:16:12.3Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

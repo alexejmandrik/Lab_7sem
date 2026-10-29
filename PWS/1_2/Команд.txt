@@ -1,0 +1,22 @@
+$body = '{"RESULT":100}'
+Invoke-RestMethod -Uri 'http://localhost:5001/stack' -Method Post -ContentType 'application/json' -Body $body
+
+
+
+
+
+
+1..10 | ForEach-Object {
+     Write-Host "Запрос $_"
+     curl.exe -s http://localhost:5001/stack
+}
+
+
+
+curl.exe -X POST "http://localhost:5001/stack?add=3" `
+  -H "Content-Type: application/json" `
+  -d "{}"
+
+
+
+curl.exe -X GET "http://localhost:5001/stack"

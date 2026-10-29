@@ -1,0 +1,54 @@
+[
+  {
+    "ContainingType": "WS01_02.Controllers.StackController",
+    "Method": "Get",
+    "RelativePath": "stack",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WS01_02.Controllers.StackController",
+    "Method": "Post",
+    "RelativePath": "stack",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "WS01_02.Controllers.ResultModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WS01_02.Controllers.StackController",
+    "Method": "Put",
+    "RelativePath": "stack",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ADD",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WS01_02.Controllers.StackController",
+    "Method": "Delete",
+    "RelativePath": "stack",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

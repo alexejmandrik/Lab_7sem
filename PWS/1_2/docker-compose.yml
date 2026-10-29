@@ -1,0 +1,32 @@
+
+services:
+  ws01-02-1:
+    environment:
+        SERVER_NAME: server1
+    build:
+      context: ./WS01-02
+      dockerfile: Dockerfile
+    container_name: ws01-02-1
+    expose:
+      - "8080"
+
+  ws01-02-2:
+    environment:
+        SERVER_NAME: server2
+    build:
+      context: ./WS01-02
+      dockerfile: Dockerfile
+    container_name: ws01-02-2
+    expose:
+      - "8080"
+
+  gateway:
+    build:
+      context: ./Gateway02
+      dockerfile: Dockerfile
+    container_name: gateway2
+    ports:
+      - "5001:8080"
+    depends_on:
+      - ws01-02-1
+      - ws01-02-2

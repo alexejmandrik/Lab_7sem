@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "RD6DwOm8ZAQ=",
+  "success": true,
+  "projectFilePath": "D:\\Labs_7sem\\PWS\\1_1\\Gateway\\Gateway.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Host\\.nuget\\packages\\system.io.hashing\\8.0.0\\system.io.hashing.8.0.0.nupkg.sha512",
+    "C:\\Users\\Host\\.nuget\\packages\\yarp.reverseproxy\\2.3.0\\yarp.reverseproxy.2.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}

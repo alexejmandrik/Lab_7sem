@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../Gateway/Gateway.csproj" Id="6242798b-0921-4621-a4e6-bea5d4d35521" />
+  <Project Path="WS01-01.csproj" />
+</Solution>
