@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 
-import '../models/task_model.dart';
-import '../services/hive_service.dart';
+import '../providers/task_provider.dart';
 import '../widgets/task_card_widget.dart';
 
 class FavoritesScreen extends StatelessWidget {
@@ -10,52 +9,34 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final favoriteTasks = context.watch<TaskProvider>().favoriteTasks;
+
     return Scaffold(
       appBar: AppBar(title: const Text('Избранное')),
-      body: ValueListenableBuilder<Box<String>>(
-        valueListenable: HiveService.favorites.listenable(),
-        builder: (context, favoritesBox, _) {
-          final favoriteTasks = HiveService.getFavoriteTasks();
-
-          if (favoriteTasks.isEmpty) {
-            return const Center(
-              child: Text('В избранном пока ничего нет'),
-            );
-          }
-
-          return ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: favoriteTasks.length,
-            itemBuilder: (context, index) {
-              final entry = favoriteTasks[index];
-              final String key = entry.key;
-              final Task task = entry.value;
-
-              return Column(
-                children: [
-                  TaskCardWidget(
-                    task: task,
-                    onTap: () {},
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton.icon(
-                      onPressed: () async {
-                        await HiveService.toggleFavorite(key);
-                      },
-                      icon: const Icon(
-                        Icons.favorite,
-                        color: Colors.pink,
+      body: favoriteTasks.isEmpty
+          ? const Center(child: Text('В избранном пока ничего нет'))
+          : ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: favoriteTasks.length,
+              itemBuilder: (context, index) {
+                final entry = favoriteTasks[index];
+                return Column(
+                  children: [
+                    TaskCardWidget(task: entry.value, onTap: () {}),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton.icon(
+                        onPressed: () => context
+                            .read<TaskProvider>()
+                            .toggleFavorite(entry.key),
+                        icon: const Icon(Icons.favorite, color: Colors.pink),
+                        label: const Text('Убрать из избранного'),
                       ),
-                      label: const Text('Убрать из избранного'),
                     ),
-                  ),
-                ],
-              );
-            },
-          );
-        },
-      ),
+                  ],
+                );
+              },
+            ),
     );
   }
 }

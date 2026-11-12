@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/task_model.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/task_provider.dart';
 import '../widgets/filter_chip_widget.dart';
 import '../widgets/task_card_widget.dart';
 import 'task_details_screen.dart';
@@ -13,33 +15,20 @@ class TaskListScreen extends StatelessWidget {
   const TaskListScreen({super.key});
 
   void openNavigation(BuildContext context, int method) {
-    final String title;
-    final String methodName;
-    final String description;
-
-    if (method == 1) {
-      title = 'Навигация 1';
-      methodName = 'Navigator.push';
-      description =
-          'Открывает новый экран поверх текущего. '
-          'Предыдущая страница остаётся в стеке навигации, '
-          'поэтому можно вернуться назад.';
-    } else if (method == 2) {
-      title = 'Навигация 2';
-      methodName = 'Navigator.pushReplacement';
-      description =
-          'Открывает новый экран и заменяет им текущий. '
-          'Предыдущий экран удаляется из стека навигации.';
-    } else {
-      title = 'Навигация 3';
-      methodName = 'Navigator.pushAndRemoveUntil';
-      description =
-          'Открывает новый экран и удаляет предыдущие '
-          'экраны из стека навигации.';
-    }
+    final title = 'Навигация $method';
+    final methodName = method == 1
+        ? 'Navigator.push'
+        : method == 2
+            ? 'Navigator.pushReplacement'
+            : 'Navigator.pushAndRemoveUntil';
+    final description = method == 1
+        ? 'Открывает новый экран поверх текущего. Предыдущая страница остаётся в стеке навигации.'
+        : method == 2
+            ? 'Открывает новый экран и заменяет им текущий.'
+            : 'Открывает новый экран и удаляет предыдущие экраны из стека навигации.';
 
     final page = MaterialPageRoute(
-      builder: (context) => NavigationLabScreen(
+      builder: (_) => NavigationLabScreen(
         title: title,
         method: methodName,
         description: description,
@@ -51,11 +40,7 @@ class TaskListScreen extends StatelessWidget {
     } else if (method == 2) {
       Navigator.pushReplacement(context, page);
     } else {
-      Navigator.pushAndRemoveUntil(
-        context,
-        page,
-        (route) => false,
-      );
+      Navigator.pushAndRemoveUntil(context, page, (_) => false);
     }
   }
 
@@ -88,83 +73,6 @@ class TaskListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Task> tasks = [
-      Task(
-        title: 'Dashboard design for admin',
-        tags: [
-          TaskTag(
-            label: 'High',
-            backgroundColor: Color(0xFFFFD2D2),
-            textColor: Colors.red,
-          ),
-          TaskTag(
-            label: 'On Track',
-            backgroundColor: Color(0xFFF3D2FF),
-            textColor: Colors.purple,
-          ),
-        ],
-        date: '14 oct 2022',
-        linksCount: 5,
-        commentsCount: 5,
-      ),
-      Task(
-        title: 'Konom web application',
-        tags: [
-          TaskTag(
-            label: 'Low',
-            backgroundColor: Color(0xFFD2FFD2),
-            textColor: Colors.green,
-          ),
-          TaskTag(
-            label: 'Meeting',
-            backgroundColor: Color(0xFFD2DCFF),
-            textColor: Colors.indigo,
-          ),
-        ],
-        date: '14 Nov 2022',
-        linksCount: 2,
-        commentsCount: 4,
-      ),
-      Task(
-        title: 'Research and developement',
-        tags: [
-          TaskTag(
-            label: 'Medium',
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-          ),
-          TaskTag(
-            label: 'At Risk',
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-          ),
-        ],
-        date: '14 oct 2022',
-        linksCount: 6,
-        commentsCount: 2,
-        backgroundColor: Color(0xFF4CAF50),
-        isDarkText: false,
-      ),
-      Task(
-        title: 'Event booking application',
-        tags: [
-          TaskTag(
-            label: 'Medium',
-            backgroundColor: Color(0xFFFFE0B2),
-            textColor: Colors.orange,
-          ),
-          TaskTag(
-            label: 'Meeting',
-            backgroundColor: Color(0xFFD2DCFF),
-            textColor: Colors.indigo,
-          ),
-        ],
-        date: '14 oct 2022',
-        linksCount: 5,
-        commentsCount: 5,
-      ),
-    ];
-
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -180,7 +88,7 @@ class TaskListScreen extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Color(0xFFE8D7FF),
+                          color: const Color(0xFFE8D7FF),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: const Icon(
@@ -197,164 +105,56 @@ class TaskListScreen extends StatelessWidget {
                           color: Colors.black,
                         ),
                       ),
-                      Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.reply,
-                              color: Colors.black87,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.grey.shade300,
-                              ),
-                            ),
-                            child: const Icon(
-                              Icons.more_vert,
-                              color: Colors.black87,
-                              size: 18,
-                            ),
-                          ),
-                        ],
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.reply, color: Colors.black87),
                       ),
                     ],
                   ),
                   const SizedBox(height: 16),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        FilterChipWidget(
-                          label: 'Complete',
-                          count: '65',
-                          isSelected: true,
-                          badgeColor: Colors.green,
-                        ),
-                        const SizedBox(width: 8),
-                        FilterChipWidget(
-                          label: 'To Do',
-                          count: '45',
-                          isSelected: false,
-                          badgeColor: Colors.grey.shade600,
-                        ),
-                        const SizedBox(width: 8),
-                        FilterChipWidget(
-                          label: 'In Review',
-                          count: '3',
-                          isSelected: false,
-                          badgeColor: Colors.purple.shade200,
-                        ),
-                      ],
-                    ),
-                  ),
+
+                  const _TaskFilters(),
+
                   const SizedBox(height: 16),
                   Expanded(
-                    child: ListView(
-                      padding: EdgeInsets.zero,
-                      children: [
-                        ...tasks.map(
-                          (task) => TaskCardWidget(
-                            task: task,
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const TaskDetailsScreen(),
-                                ),
-                              );
-                            },
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const _TaskItems(),
+                          const SizedBox(height: 12),
+                          const Text(
+                            'Лабораторная работа № 6',
+                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                           ),
-                        ),
-                        const SizedBox(height: 12),
-                        const Text(
-                          'Лабораторная работа № 6',
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        labButton(
-                          context,
-                          'Навигация 1 — push',
-                          Icons.looks_one,
-                          () => openNavigation(context, 1),
-                        ),
-                        labButton(
-                          context,
-                          'Навигация 2 — pushReplacement',
-                          Icons.looks_two,
-                          () => openNavigation(context, 2),
-                        ),
-                        labButton(
-                          context,
-                          'Навигация 3 — pushAndRemoveUntil',
-                          Icons.looks_3,
-                          () => openNavigation(context, 3),
-                        ),
-                        labButton(
-                          context,
-                          'PageView',
-                          Icons.view_carousel_outlined,
-                          () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const PageViewScreen(),
-                              ),
-                            );
-                          },
-                        ),
-                        labButton(
-                          context,
-                          'Информация об устройстве',
-                          Icons.phone_android,
-                          () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const DeviceInfoScreen(),
-                              ),
-                            );
-                          },
-                        ),
-                        labButton(
-                          context,
-                          'Открыть карту',
-                          Icons.map_outlined,
-                          () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const MapScreen(),
-                              ),
-                            );
-                          },
-                        ),
-                        labButton(
-                          context,
-                          'Сделать фото',
-                          Icons.camera_alt_outlined,
-                          () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const CameraScreen(),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                          const SizedBox(height: 10),
+                          labButton(context, 'Навигация 1 — push', Icons.looks_one,
+                              () => openNavigation(context, 1)),
+                          labButton(context, 'Навигация 2 — pushReplacement',
+                              Icons.looks_two, () => openNavigation(context, 2)),
+                          labButton(context, 'Навигация 3 — pushAndRemoveUntil',
+                              Icons.looks_3, () => openNavigation(context, 3)),
+                          labButton(context, 'PageView', Icons.view_carousel_outlined,
+                              () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => const PageViewScreen()));
+                          }),
+                          labButton(context, 'Информация об устройстве',
+                              Icons.phone_android, () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => const DeviceInfoScreen()));
+                          }),
+                          labButton(context, 'Открыть карту', Icons.map_outlined, () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => const MapScreen()));
+                          }),
+                          labButton(context, 'Сделать фото', Icons.camera_alt_outlined,
+                              () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => const CameraScreen()));
+                          }),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -365,13 +165,9 @@ class TaskListScreen extends StatelessWidget {
               bottom: 80,
               child: FloatingActionButton(
                 onPressed: () {},
-                backgroundColor: Color(0xFFE8D7FF),
+                backgroundColor: const Color(0xFFE8D7FF),
                 elevation: 3,
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.purple,
-                  size: 30,
-                ),
+                child: const Icon(Icons.add, color: Colors.purple, size: 30),
               ),
             ),
             Positioned(
@@ -379,10 +175,7 @@ class TaskListScreen extends StatelessWidget {
               right: 16,
               bottom: 12,
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(30),
@@ -394,58 +187,16 @@ class TaskListScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.grid_view_rounded,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Row(
-                        children: [
-                          Icon(
-                            Icons.check_circle_outline,
-                            color: Colors.white,
-                            size: 18,
-                          ),
-                          SizedBox(width: 6),
-                          Text(
-                            'Task',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.bar_chart_rounded,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    const CircleAvatar(
+                    Icon(Icons.grid_view_rounded, color: Colors.grey),
+                    Text('Task', style: TextStyle(fontWeight: FontWeight.bold)),
+                    Icon(Icons.bar_chart_rounded, color: Colors.grey),
+                    CircleAvatar(
                       radius: 16,
                       backgroundColor: Colors.orangeAccent,
-                      child: Icon(
-                        Icons.person,
-                        color: Colors.white,
-                        size: 20,
-                      ),
+                      child: Icon(Icons.person, color: Colors.white, size: 20),
                     ),
                   ],
                 ),
@@ -454,6 +205,71 @@ class TaskListScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _TaskFilters extends StatelessWidget {
+  const _TaskFilters();
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = context.watch<TaskProvider>();
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: TaskProvider.filters.map((filter) {
+          final selected = provider.selectedFilter == filter;
+          final badgeColor = filter == 'Complete'
+              ? Colors.green
+              : filter == 'To Do'
+                  ? Colors.grey.shade600
+                  : Colors.purple.shade200;
+
+          return Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: GestureDetector(
+              onTap: () => context.read<TaskProvider>().selectFilter(filter),
+              child: FilterChipWidget(
+                label: filter,
+                count: '${provider.countFor(filter)}',
+                isSelected: selected,
+                badgeColor: badgeColor,
+              ),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+
+class _TaskItems extends StatelessWidget {
+  const _TaskItems();
+
+  @override
+  Widget build(BuildContext context) {
+    final tasks = context.watch<TaskProvider>().filteredTasks;
+
+    if (tasks.isEmpty) {
+      return const Center(child: Text('В этой категории пока нет задач'));
+    }
+
+    return Column(
+      children: tasks.map((entry) {
+        return TaskCardWidget(
+          task: entry.value,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const TaskDetailsScreen(),
+              ),
+            );
+          },
+        );
+      }).toList(),
     );
   }
 }

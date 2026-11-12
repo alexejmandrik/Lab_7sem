@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../gRPCClient01/gRPCClient01.csproj" />
+  <Project Path="gRPCServer01.csproj" />
+</Solution>

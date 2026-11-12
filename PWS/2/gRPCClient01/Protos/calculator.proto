@@ -1,0 +1,31 @@
+
+syntax = "proto3";
+
+option csharp_namespace = "CalculatorGrpc";
+
+package calculator;
+
+service Calculator {
+    rpc SUM (CalcRequest) returns (DoubleReply);    
+    rpc SUB (CalcRequest) returns (DoubleReply);
+    rpc MUL (CalcRequest) returns (DoubleReply);
+    rpc DIV (CalcRequest) returns (DoubleReply);
+    rpc FACT (FactRequest) returns (IntReply);
+}
+
+message CalcRequest {
+    double x = 1;
+    double y = 2;
+}
+
+message FactRequest {
+    int32 x = 1;
+}
+
+message DoubleReply {
+    double result = 1;
+}
+
+message IntReply {
+    int32 result = 1;
+}

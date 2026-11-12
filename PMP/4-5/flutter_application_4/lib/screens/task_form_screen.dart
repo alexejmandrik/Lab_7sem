@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../models/task_model.dart';
-import '../services/hive_service.dart';
+import '../providers/task_provider.dart';
+import 'package:provider/provider.dart';
 
 class TaskFormScreen extends StatefulWidget {
   final String? taskKey;
@@ -79,7 +80,7 @@ class _TaskFormScreenState extends State<TaskFormScreen> {
     final key = widget.taskKey ??
         'task_${DateTime.now().microsecondsSinceEpoch}';
 
-    await HiveService.tasks.put(key, task);
+    await context.read<TaskProvider>().saveTask(key, task);
 
     if (mounted) {
       Navigator.pop(context, true);

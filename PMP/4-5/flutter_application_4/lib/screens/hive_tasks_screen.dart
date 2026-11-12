@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 
 import '../models/task_model.dart';
-import '../services/hive_service.dart';
+import '../providers/task_provider.dart';
 import '../widgets/task_card_widget.dart';
 import 'task_form_screen.dart';
 import 'favorites_screen.dart';
@@ -10,57 +10,50 @@ import 'user_switch_screen.dart';
 import 'hive_demo_screen.dart';
 import 'task_list_screen.dart';
 
-class HiveTasksScreen extends StatefulWidget {
+class HiveTasksScreen extends StatelessWidget {
   const HiveTasksScreen({super.key});
 
-  @override
-  State<HiveTasksScreen> createState() => _HiveTasksScreenState();
-}
-
-class _HiveTasksScreenState extends State<HiveTasksScreen> {
-  Future<void> _open(Widget screen) async {
+  Future<void> _open(BuildContext context, Widget screen) async {
     await Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => screen),
     );
-
-    if (mounted) setState(() {});
   }
 
-  Future<void> _edit(String key, Task task) async {
-  final user = HiveService.currentUser;
+  Future<void> _edit(
+    BuildContext context,
+    String key,
+    Task task,
+  ) async {
+    final user = context.read<TaskProvider>().currentUser;
 
-  if (user == null || !user.canManageTasks) {
-    if (!mounted) return;
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('У вас нет прав на редактирование задач'),
-      ),
-    );
-    return;
-  }
-
-  await _open(TaskFormScreen(taskKey: key, task: task));
-}
-  Future<void> _add() async {
-    await _open(const TaskFormScreen());
-  }
-
-  Future<void> _delete(String key) async {
-    await HiveService.tasks.delete(key);
-
-    if (mounted) {
+    if (user == null || !user.canManageTasks) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Задача удалена')),
+        const SnackBar(
+          content: Text('У вас нет прав на редактирование задач'),
+        ),
       );
+      return;
     }
+
+    await _open(context, TaskFormScreen(taskKey: key, task: task));
+  }
+
+  Future<void> _delete(BuildContext context, String key) async {
+    await context.read<TaskProvider>().deleteTask(key);
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Задача удалена')),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final user = HiveService.currentUser;
+    // Подписка на общее состояние: экран обновится при изменениях в Hive.
+    final provider = context.watch<TaskProvider>();
+    final user = provider.currentUser;
     final canManage = user?.canManageTasks ?? false;
+    final entries = provider.allTasks;
 
     return Scaffold(
       appBar: AppBar(
@@ -68,20 +61,20 @@ class _HiveTasksScreenState extends State<HiveTasksScreen> {
         actions: [
           IconButton(
             tooltip: 'Пользователь',
-            onPressed: () => _open(const UserSwitchScreen()),
+            onPressed: () => _open(context, const UserSwitchScreen()),
             icon: const Icon(Icons.person),
           ),
           IconButton(
             tooltip: 'Избранное',
-            onPressed: () => _open(const FavoritesScreen()),
+            onPressed: () => _open(context, const FavoritesScreen()),
             icon: const Icon(Icons.favorite),
           ),
           PopupMenuButton<String>(
             onSelected: (value) {
               if (value == 'demo') {
-                _open(const HiveDemoScreen());
+                _open(context, const HiveDemoScreen());
               } else if (value == 'old') {
-                _open(const TaskListScreen());
+                _open(context, const TaskListScreen());
               }
             },
             itemBuilder: (context) => const [
@@ -99,7 +92,7 @@ class _HiveTasksScreenState extends State<HiveTasksScreen> {
       ),
       floatingActionButton: canManage
           ? FloatingActionButton(
-              onPressed: _add,
+              onPressed: () => _open(context, const TaskFormScreen()),
               child: const Icon(Icons.add),
             )
           : null,
@@ -115,72 +108,59 @@ class _HiveTasksScreenState extends State<HiveTasksScreen> {
           ),
           const Divider(height: 1),
           Expanded(
-            child: ValueListenableBuilder<Box<Task>>(
-              valueListenable: HiveService.tasks.listenable(),
-              builder: (context, box, _) {
-                if (box.isEmpty) {
-                  return const Center(
-                    child: Text('Задач пока нет'),
-                  );
-                }
+            child: entries.isEmpty
+                ? const Center(child: Text('Задач пока нет'))
+                : ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: entries.length,
+                    itemBuilder: (context, index) {
+                      final entry = entries[index];
+                      final key = entry.key;
+                      final task = entry.value;
+                      final isFavorite = provider.isFavorite(key);
 
-                final entries = box.toMap().entries.toList();
-
-                return ListView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: entries.length,
-                  itemBuilder: (context, index) {
-                    final entry = entries[index];
-                    final key = entry.key.toString();
-                    final task = entry.value;
-                    final isFavorite =
-                        HiveService.isFavorite(key);
-
-                    return Column(
-                      children: [
-                        TaskCardWidget(
-                          task: task,
-                          onTap: () => _edit(key, task),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                              tooltip: isFavorite
-                                  ? 'Убрать из избранного'
-                                  : 'В избранное',
-                              onPressed: () async {
-                                await HiveService.toggleFavorite(key);
-                                if (mounted) setState(() {});
-                              },
-                              icon: Icon(
-                                isFavorite
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: Colors.pink,
-                              ),
-                            ),
-                            if (canManage)
+                      return Column(
+                        children: [
+                          TaskCardWidget(
+                            task: task,
+                            onTap: () => _edit(context, key, task),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
                               IconButton(
-                                tooltip: 'Редактировать',
-                                onPressed: () => _edit(key, task),
-                                icon: const Icon(Icons.edit),
+                                tooltip: isFavorite
+                                    ? 'Убрать из избранного'
+                                    : 'В избранное',
+                                onPressed: () => context
+                                    .read<TaskProvider>()
+                                    .toggleFavorite(key),
+                                icon: Icon(
+                                  isFavorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color: Colors.pink,
+                                ),
                               ),
-                            if (canManage)
-                              IconButton(
-                                tooltip: 'Удалить',
-                                onPressed: () => _delete(key),
-                                icon: const Icon(Icons.delete_outline),
-                              ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                      ],
-                    );
-                  },
-                );
-              },
-            ),
+                              if (canManage)
+                                IconButton(
+                                  tooltip: 'Редактировать',
+                                  onPressed: () => _edit(context, key, task),
+                                  icon: const Icon(Icons.edit),
+                                ),
+                              if (canManage)
+                                IconButton(
+                                  tooltip: 'Удалить',
+                                  onPressed: () => _delete(context, key),
+                                  icon: const Icon(Icons.delete_outline),
+                                ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                        ],
+                      );
+                    },
+                  ),
           ),
         ],
       ),

@@ -1,9 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 
 import 'models/task_model.dart';
 import 'models/app_user.dart';
+import 'providers/task_provider.dart';
 import 'services/hive_service.dart';
 import 'screens/hive_tasks_screen.dart';
 
@@ -13,7 +14,6 @@ Future<void> main() async {
   try {
     await Hive.initFlutter();
 
-    // Регистрация адаптеров Hive
     Hive.registerAdapter(TaskTagAdapter());
     Hive.registerAdapter(TaskAdapter());
     Hive.registerAdapter(UserRoleAdapter());
@@ -21,7 +21,16 @@ Future<void> main() async {
 
     await HiveService.init();
 
-    runApp(const MyApp());
+    runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => TaskProvider(),
+          ),
+        ],
+        child: const MyApp(),
+      ),
+    );
   } catch (e, stackTrace) {
     debugPrint('STARTUP ERROR: $e');
     debugPrint('$stackTrace');
@@ -55,9 +64,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFF6F8FA),
         fontFamily: 'Roboto',
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.purple,
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
       ),
       home: const HiveTasksScreen(),
     );
