@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/task_bloc.dart';
+import '../bloc/task_event.dart';
+import '../bloc/task_state.dart';
 import '../models/task_model.dart';
-import '../providers/task_provider.dart';
-import 'package:provider/provider.dart';
 
 class TaskFormScreen extends StatefulWidget {
   final String? taskKey;
@@ -32,6 +34,9 @@ class _TaskFormScreenState extends State<TaskFormScreen> {
 
     final task = widget.task;
 
+    // Контроллеры текстовых полей — это чисто локальное UI-состояние
+    // формы (черновик ввода), а не общие данные приложения, поэтому
+    // они по-прежнему живут в State, а не в BLoC.
     _titleController = TextEditingController(
       text: task?.title ?? '',
     );
@@ -55,7 +60,7 @@ class _TaskFormScreenState extends State<TaskFormScreen> {
     super.dispose();
   }
 
-  Future<void> _save() async {
+  void _save() {
     if (!_formKey.currentState!.validate()) return;
 
     final oldTask = widget.task;
@@ -80,11 +85,10 @@ class _TaskFormScreenState extends State<TaskFormScreen> {
     final key = widget.taskKey ??
         'task_${DateTime.now().microsecondsSinceEpoch}';
 
-    await context.read<TaskProvider>().saveTask(key, task);
-
-    if (mounted) {
-      Navigator.pop(context, true);
-    }
+    // Только отправка события — без ожидания и без setState.
+    // Навигация назад выполняется в BlocListener, когда BLoC
+    // сообщит об успешном сохранении (side effect).
+    context.read<TaskBloc>().add(TaskSaved(key, task));
   }
 
   Widget _field(
@@ -125,32 +129,50 @@ class _TaskFormScreenState extends State<TaskFormScreen> {
   Widget build(BuildContext context) {
     final isEditing = widget.task != null;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          isEditing ? 'Редактирование задачи' : 'Новая задача',
+    return BlocListener<TaskBloc, TaskState>(
+      // Реагируем только на завершение именно действия «сохранение
+      // задачи» — это side effect (навигация/снекбар), не связанный
+      // с перерисовкой самой формы.
+      listenWhen: (previous, current) =>
+          current.actionKind == TaskActionKind.taskSaved &&
+          (previous.actionStatus != current.actionStatus ||
+              previous.actionMessage != current.actionMessage),
+      listener: (context, state) {
+        if (state.actionStatus == TaskActionStatus.success) {
+          Navigator.pop(context, true);
+        } else if (state.actionStatus == TaskActionStatus.failure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.actionMessage ?? 'Ошибка сохранения')),
+          );
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            isEditing ? 'Редактирование задачи' : 'Новая задача',
+          ),
         ),
-      ),
-      body: Form(
-        key: _formKey,
-        child: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            _field('Название', _titleController),
-            _field('Дата', _dateController),
-            _field('Количество ссылок', _linksController, numeric: true),
-            _field(
-              'Количество комментариев',
-              _commentsController,
-              numeric: true,
-            ),
-            const SizedBox(height: 8),
-            FilledButton.icon(
-              onPressed: _save,
-              icon: const Icon(Icons.save),
-              label: const Text('Сохранить'),
-            ),
-          ],
+        body: Form(
+          key: _formKey,
+          child: ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              _field('Название', _titleController),
+              _field('Дата', _dateController),
+              _field('Количество ссылок', _linksController, numeric: true),
+              _field(
+                'Количество комментариев',
+                _commentsController,
+                numeric: true,
+              ),
+              const SizedBox(height: 8),
+              FilledButton.icon(
+                onPressed: _save,
+                icon: const Icon(Icons.save),
+                label: const Text('Сохранить'),
+              ),
+            ],
+          ),
         ),
       ),
     );

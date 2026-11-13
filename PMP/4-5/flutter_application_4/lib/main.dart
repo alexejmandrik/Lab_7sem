@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
 
+import 'bloc/task_bloc.dart';
+import 'bloc/task_event.dart';
 import 'models/task_model.dart';
 import 'models/app_user.dart';
-import 'providers/task_provider.dart';
 import 'services/hive_service.dart';
 import 'screens/hive_tasks_screen.dart';
 
@@ -22,12 +23,8 @@ Future<void> main() async {
     await HiveService.init();
 
     runApp(
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (_) => TaskProvider(),
-          ),
-        ],
+      BlocProvider<TaskBloc>(
+        create: (_) => TaskBloc()..add(const TasksSubscriptionRequested()),
         child: const MyApp(),
       ),
     );

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../providers/task_provider.dart';
+import '../bloc/task_bloc.dart';
+import '../bloc/task_event.dart';
+import '../bloc/task_state.dart';
 import '../widgets/filter_chip_widget.dart';
 import '../widgets/task_card_widget.dart';
 import 'task_details_screen.dart';
@@ -214,33 +216,36 @@ class _TaskFilters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<TaskProvider>();
+    return BlocBuilder<TaskBloc, TaskState>(
+      builder: (context, state) {
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: TaskState.filters.map((filter) {
+              final selected = state.selectedFilter == filter;
+              final badgeColor = filter == 'Complete'
+                  ? Colors.green
+                  : filter == 'To Do'
+                      ? Colors.grey.shade600
+                      : Colors.purple.shade200;
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: TaskProvider.filters.map((filter) {
-          final selected = provider.selectedFilter == filter;
-          final badgeColor = filter == 'Complete'
-              ? Colors.green
-              : filter == 'To Do'
-                  ? Colors.grey.shade600
-                  : Colors.purple.shade200;
-
-          return Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: GestureDetector(
-              onTap: () => context.read<TaskProvider>().selectFilter(filter),
-              child: FilterChipWidget(
-                label: filter,
-                count: '${provider.countFor(filter)}',
-                isSelected: selected,
-                badgeColor: badgeColor,
-              ),
-            ),
-          );
-        }).toList(),
-      ),
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: GestureDetector(
+                  onTap: () =>
+                      context.read<TaskBloc>().add(TaskFilterSelected(filter)),
+                  child: FilterChipWidget(
+                    label: filter,
+                    count: '${state.countFor(filter)}',
+                    isSelected: selected,
+                    badgeColor: badgeColor,
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        );
+      },
     );
   }
 }
@@ -250,26 +255,30 @@ class _TaskItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tasks = context.watch<TaskProvider>().filteredTasks;
+    return BlocBuilder<TaskBloc, TaskState>(
+      builder: (context, state) {
+        final tasks = state.filteredTasks;
 
-    if (tasks.isEmpty) {
-      return const Center(child: Text('В этой категории пока нет задач'));
-    }
+        if (tasks.isEmpty) {
+          return const Center(child: Text('В этой категории пока нет задач'));
+        }
 
-    return Column(
-      children: tasks.map((entry) {
-        return TaskCardWidget(
-          task: entry.value,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const TaskDetailsScreen(),
-              ),
+        return Column(
+          children: tasks.map((entry) {
+            return TaskCardWidget(
+              task: entry.value,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const TaskDetailsScreen(),
+                  ),
+                );
+              },
             );
-          },
+          }).toList(),
         );
-      }).toList(),
+      },
     );
   }
 }
